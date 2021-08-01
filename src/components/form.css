@@ -1,0 +1,11 @@
+label{
+    display:flex !important;
+    align-items: flex-start;
+    font-size: larger;
+}
+.mb-3{
+    display:flex !important;
+}
+div.half{
+    width: 30em;
+}
