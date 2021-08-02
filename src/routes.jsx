@@ -7,7 +7,7 @@ const Routes = ()=>{
         <section>
           <Switch>
             <Route exact path="/Search" component={Cards}/>
-            <Route path="/info" component={Character}/>
+            <Route path="/more" component={Character}/>
           </Switch>
         </section>
     );

@@ -1,0 +1,13 @@
+.card-container{
+    display: flex;
+    justify-content: center;
+}
+
+.card-group{
+    width: 50%;
+}
+
+.tablist{
+    display: flex;
+    flex-wrap: wrap;
+}

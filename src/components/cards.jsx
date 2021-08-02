@@ -1,7 +1,8 @@
 import './cards.css';
-import { Card, Row, Col } from 'react-bootstrap';
+import { Card, Row, Col, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import {setHero} from '../Redux/Actions';
 
 const Cards = () => {
 
@@ -10,7 +11,13 @@ const Cards = () => {
     const dispatch = useDispatch();
     let size = 0;
     let renderCards = "";
-    if (typeof heroes === "object") {
+
+    const handleOnClick = (id)=>{
+        dispatch(setHero(id))
+    }
+
+    if (Array.isArray(heroes)) {
+        
         if (heroes !== undefined && !heroes.includes(undefined)) {
             size = heroes.length;
         }
@@ -30,16 +37,16 @@ const Cards = () => {
                         <Card.Img variant="top" src={hero.image.url}></Card.Img>
                         <Card.Body>
                             <Card.Text>{hero.name}</Card.Text>
-                            <Link to={"/" + hero.name + "/info"}>+ Show More</Link>
+                            <Link to={"/more/"+hero.name}>
+                                <Button onClick={()=>handleOnClick(i)}>+ Show More</Button>
+                            </Link>
                         </Card.Body>
                     </Card>
                 </Col>
             )
         })
     } else {
-        return (
-            <h2>{heroes}</h2>
-        );
+        return null;
     }
 
     return (
