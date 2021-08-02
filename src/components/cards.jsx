@@ -1,35 +1,45 @@
 import './cards.css';
 import { Card, Row, Col } from 'react-bootstrap';
-import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
-const Cards = (searched) => {
+const Cards = () => {
+
+    const heroes = useSelector((state) => state.heroes);
+    const error = useSelector((state)=>state.hasError);
+    const dispatch = useDispatch();
     let size = 0;
     let renderCards = "";
-    if (searched.searched !== undefined) {
-        console.log(searched.searched);
-        size = searched.searched.length;
-        console.log(size > 0);
+    if (typeof heroes === "object") {
+        if (heroes !== undefined && !heroes.includes(undefined)) {
+            size = heroes.length;
+        }
     }
 
-    const handleOnClick = (event) => {
-        console.log(event);
+    if(error){
+        return(
+            <h3>We couldn't find the character you are looking for. <br/> Try again!</h3>
+        );
     }
 
     if (size > 0) {
-        renderCards = searched.searched.map((item, i) => {
+        renderCards = heroes.map((hero, i) => {
             return (
-                <Col>
-                    <Card border="light" key={i}>
-                        <Card.Img variant="top" src={item.image.url}></Card.Img>
+                <Col key={i}>
+                    <Card border="light">
+                        <Card.Img variant="top" src={hero.image.url}></Card.Img>
                         <Card.Body>
-                            {item.name}
+                            <Card.Text>{hero.name}</Card.Text>
+                            <Link to={"/" + hero.name + "/info"}>+ Show More</Link>
                         </Card.Body>
                     </Card>
                 </Col>
             )
         })
     } else {
-        return "";
+        return (
+            <h2>{heroes}</h2>
+        );
     }
 
     return (
