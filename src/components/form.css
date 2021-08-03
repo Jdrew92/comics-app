@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue&display=swap');
 label{
     display:flex !important;
     align-items: flex-start;
@@ -5,4 +6,7 @@ label{
 }
 .mb-3{
     display:flex !important;
+}
+button{
+    font-family: 'Comic Neue', cursive;
 }
